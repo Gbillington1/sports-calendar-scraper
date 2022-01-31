@@ -24,7 +24,7 @@ const util = require('./util.js');
     let locationStrings = util.getStringArrayOf($, $('.calendar-daily-location'));
     
     // merge events and locations into an array of event objects
-    let events = util.mergeEvents(eventStrings, locationStrings)
+    let events = util.mergeEvents($, eventStrings, locationStrings)
     
     console.log(events)
 })();
