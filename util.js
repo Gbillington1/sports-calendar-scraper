@@ -53,7 +53,7 @@ function getStringArrayOf($, array) {
 
 // function to parse/merge the event and location arrays into an array of event objects
 // input: array of strings containing event data, array of strings containing location data
-// output: array of event objects
+// output: array of event objects 
 function mergeEvents($, eventStrings, locationStrings) {
 
     // error handling
@@ -76,7 +76,8 @@ function mergeEvents($, eventStrings, locationStrings) {
             date: "",
             team: "",
             opponent: "",
-            location: ""
+            location: "",
+            home: false
         }
 
         // time from string "4:30 PM"
@@ -93,6 +94,10 @@ function mergeEvents($, eventStrings, locationStrings) {
 
 
         event.location = locationStrings[i];
+
+        if (event.location.includes("Georgetown")) {
+            event.home = true;
+        }
 
         events.push(event)
 
