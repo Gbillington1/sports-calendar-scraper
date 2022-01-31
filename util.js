@@ -10,7 +10,7 @@ async function scrapeCalendar() {
         waitUntil: 'networkidle2'
     });
 
-    // get html and load it into parser (cheerio) 
+    // get html return it
     const html = await page.content();
 
     browser.close();
@@ -18,8 +18,8 @@ async function scrapeCalendar() {
     return html;
 }
 
-// takes in array of cheerio objects and returns array of strings
-// used to get the event data out of the cheerio objects 
+// input: array of cheerio objects containing weirdly formatted event data
+// output: array of strings containing event data
 function getStringArrayOf($, array) {
 
     let stringArray = [];
@@ -52,6 +52,8 @@ function getStringArrayOf($, array) {
 }
 
 // function to parse/merge the event and location arrays into an array of event objects
+// input: array of strings containing event data, array of strings containing location data
+// output: array of event objects
 function mergeEvents($, eventStrings, locationStrings) {
 
     // error handling
