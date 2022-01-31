@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 
 // uses puppeteer to scrape todays sports calendar page 
 async function scrapeCalendar() {
-    // open browser and go to GMHS sports schedule page
+    // open browser and go to specified calendar page
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(process.env.CALENDAR_URL, {
@@ -20,7 +20,6 @@ async function scrapeCalendar() {
 
 // takes in array of cheerio objects and returns array of strings
 // used to get the event data out of the cheerio objects 
-// todo: add removal of "CAL" at end of events 
 function getStringArrayOf($, array) {
 
     let stringArray = [];
@@ -53,7 +52,6 @@ function getStringArrayOf($, array) {
 }
 
 // function to parse/merge the event and location arrays into an array of event objects
-// todo: get day from the page instead of current day (to select games from any day of the calendar)
 function mergeEvents($, eventStrings, locationStrings) {
 
     // error handling
@@ -63,7 +61,7 @@ function mergeEvents($, eventStrings, locationStrings) {
     
     let events = [];
 
-    // Get date from calendar element in html
+    // Get date from calendar element in html (date relative to page, not machine)
     let dateElem = removeTabs($(".daily-calendar").text().trim());
     let date = dateElem.substring(0, dateElem.search(/\n/));
 
