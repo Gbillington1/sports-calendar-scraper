@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const util = require('./util.js');
+const mail = require('./mail.js');
 
 (async () => {
     const html = await util.scrapeCalendar();
@@ -16,7 +17,7 @@ const util = require('./util.js');
 
     // todo: find a way to handle postponed games and canceled games
     // todo: find a way to handle special events (Wrestling, swimming, golf, etc.) 
-    if (eventStrings[eventStrings.length -1].includes("Postponed")) {
+    if (eventStrings[eventStrings.length - 1].includes("Postponed")) {
         console.log("This event has been postponed.")
     }
     
@@ -24,6 +25,11 @@ const util = require('./util.js');
     
     // merge events and locations into an array of event objects
     let events = util.mergeEvents($, eventStrings, locationStrings)
+
+    // generate announcements from events
+    let announcements = mail.generateAnnouncementsFromEvents(events);
+
+    // send email to my address with the events in announement readable format
+    mail.sendAnnouncementsEmail(announcements);
     
-    console.log(events)
 })();
