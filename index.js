@@ -14,6 +14,18 @@ const util = require('./util.js');
     // ] 
 
     let eventStrings = util.getStringArrayOf($, $('.calendar-daily-event'));
+
+    // light error handling
+    if (eventStrings.length == 0) {
+        console.log("There are no events today.")
+        return
+    }
+
+    // todo: find a way to handle postponed games and canceled games
+    // todo: find a way to handle special events (Wrestling, swimming, golf, etc.) 
+    if (eventStrings[eventStrings.length -1].includes("Postponed")) {
+        console.log("This event has been postponed.")
+    }
     
     // let locationStrings = [
     //     'North Reading High School',
