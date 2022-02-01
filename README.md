@@ -3,8 +3,8 @@ This NodeJS script scrapes my school's sports calendar and then sends me an emai
 
 ### Todo
 - [ ] Handle special events (swim/wrestling meets, golf matches, etc.)
-- [ ] Dockerize and push to VPS 
-- [ ] Run script every weekday at 7 AM on the VPS
+- [ ] Configure RPI 
+- [ ] Write cronjob `0 7 * * 1-5 node index.js`
 
 ### Please critique my code!
 As a young developer, I am constantly learning. Feel free to leave any feedback via issues or pull requests. Additionally, you can leave a TikTok comment (see below), or even [send me an email!](mailto:graham@grahambillington.com)
