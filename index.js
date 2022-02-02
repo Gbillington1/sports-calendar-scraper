@@ -4,7 +4,7 @@ const mail = require('./mail.js');
 
 (async () => {
     const html = await util.scrapeCalendar();
-    
+
     const $ = cheerio.load(html);
 
     let eventStrings = util.getStringArrayOf($, $('.calendar-daily-event'));
