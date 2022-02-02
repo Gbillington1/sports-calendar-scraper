@@ -4,7 +4,7 @@ const puppeteer = require('puppeteer');
 // uses puppeteer to scrape todays sports calendar page 
 async function scrapeCalendar() {
     // open browser and go to specified calendar page
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ executablePath: 'chromium-browser' });
     const page = await browser.newPage();
     await page.goto(process.env.CALENDAR_URL, {
         waitUntil: 'networkidle2'
