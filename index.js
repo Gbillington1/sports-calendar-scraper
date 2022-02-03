@@ -1,3 +1,4 @@
+process.chdir(__dirname);
 const cheerio = require('cheerio');
 const util = require('./util.js');
 const mail = require('./mail.js');
