@@ -46,9 +46,14 @@ function getStringArrayOf($, array) {
 
 }
 
-// function to parse/merge the event and location arrays into an array of event objects
-// input: array of strings containing event data, array of strings containing location data
-// output: array of event objects 
+
+/**
+ * Parses the event strings as an object.
+ * @param {import("cheerio").CheerioAPI} $ The cheerio API.
+ * @param {string[]} eventStrings An array of events as strings.
+ * @param {string[]} locationStrings An array of locations.
+ * @returns {{ time: string; team: string; date: string; opponent: string; location: string; home: string }[]} An array of event objects.
+ */
 function mergeEvents($, eventStrings, locationStrings) {
 
     // error handling
