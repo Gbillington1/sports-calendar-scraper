@@ -3,6 +3,7 @@ This NodeJS script scrapes my school's sports calendar and then sends me an emai
 
 ### Todo
 - [ ] Handle special events (swim/wrestling meets, golf matches, etc.)
+- [ ] Scrape scores from games that happened the day before to report on announcements
 - [x] Configure RPI 
 - [x] Write cronjob `0 7 * * 1-5 node index.js`
 - [x] Write git deployment hook
