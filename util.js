@@ -1,20 +1,11 @@
-require("dotenv").config();
-const puppeteer = require('puppeteer');
+const { default: axios } = require("axios");
 
-// uses puppeteer to scrape todays sports calendar page 
-async function scrapeCalendar() {
-    // open browser and go to specified calendar page
-    const browser = await puppeteer.launch({ executablePath: 'chromium-browser' });
-    const page = await browser.newPage();
-    await page.goto(process.env.CALENDAR_URL, {
-        waitUntil: 'networkidle2'
-    });
-
-    // get html return it
-    const html = await page.content();
-
-    browser.close();
-
+/**
+ * Gets the HTML for the calendar page.
+ * @returns {Promise<string>} A promise that resolves with the HTML for the calendar page.
+ */
+async function getCalendarHTML() {
+    const { data: html } = await axios.get(process.env.CALENDAR_URL);
     return html;
 }
 
@@ -112,7 +103,7 @@ function removeTabs(string) {
 }
 
 module.exports = {
-    scrapeCalendar,
+    getCalendarHTML,
     getStringArrayOf,
     mergeEvents
 }

@@ -5,7 +5,7 @@ const util = require('./util.js');
 const mail = require('./mail.js');
 
 (async () => {
-    const html = await util.scrapeCalendar();
+    const html = await util.getCalendarHTML();
 
     const $ = cheerio.load(html);
 
