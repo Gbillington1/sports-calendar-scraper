@@ -5,8 +5,8 @@ This NodeJS script scrapes my school's sports calendar and then sends me an emai
 - [ ] Handle special events (swim/wrestling meets, golf matches, etc.)
 - [ ] Scrape scores from games that happened the day before to report on announcements
 - [x] Configure RPI 
-- [x] Write cronjob `0 7 * * 1-5 node index.js`
-- [x] Write git deployment hook
+- [x] Write cronjob to run script every weekday at 7 AM `0 7 * * 1-5 bash runsportscalscraper.sh`
+- [x] Write git deployment hook to automate deployment to RPI
 
 ### Please critique my code!
 As a young developer, I am constantly learning. Feel free to leave any feedback via issues or pull requests. Additionally, you can leave a TikTok comment (see below), or even [send me an email!](mailto:graham@grahambillington.com)
