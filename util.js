@@ -5,11 +5,8 @@ const { default: axios } = require("axios");
  * @returns {Promise<string>} A promise that resolves with the HTML for the calendar page.
  */
 async function getCalendarHTML() {
-    const { data: html } = await axios.get(process.env.CALENDAR_URL, {
-			headers: {
-				"User-Agent": process.env.USER_AGENT
-			}
-		});
+	  const headers = { "User-Agent": process.env.USER_AGENT }
+    const { data: html } = await axios.get(process.env.CALENDAR_URL, { headers });
     return html;
 }
 
