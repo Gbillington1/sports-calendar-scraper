@@ -1,14 +1,15 @@
-process.chdir(__dirname);
+require("dotenv").config();
+
 const cheerio = require('cheerio');
 const util = require('./util.js');
 const mail = require('./mail.js');
 
 (async () => {
-    const html = await util.scrapeCalendar();
+    const html = await util.getCalendarHTML();
 
     const $ = cheerio.load(html);
 
-    let eventStrings = util.getStringArrayOf($, $('.calendar-daily-event'));
+    const eventStrings = util.getStringArrayOf($, $('.calendar-daily-event'));
 
     // light error handling
     if (eventStrings.length == 0) {
@@ -22,13 +23,13 @@ const mail = require('./mail.js');
         console.log("This event has been postponed.")
     }
     
-    let locationStrings = util.getStringArrayOf($, $('.calendar-daily-location'));
+    const locationStrings = util.getStringArrayOf($, $('.calendar-daily-location'));
     
     // merge events and locations into an array of event objects
-    let events = util.mergeEvents($, eventStrings, locationStrings)
+    const events = util.mergeEvents($, eventStrings, locationStrings)
 
     // generate announcements from events
-    let announcements = mail.generateAnnouncementsFromEvents(events);
+    const announcements = mail.generateAnnouncementsFromEvents(events);
 
     // send email to my address with the events in announement readable format
     mail.sendAnnouncementsEmail(announcements);

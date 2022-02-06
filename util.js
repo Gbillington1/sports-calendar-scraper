@@ -1,20 +1,12 @@
-require("dotenv").config();
-const puppeteer = require('puppeteer');
+const { default: axios } = require("axios");
 
-// uses puppeteer to scrape todays sports calendar page 
-async function scrapeCalendar() {
-    // open browser and go to specified calendar page
-    const browser = await puppeteer.launch({ executablePath: 'chromium-browser' });
-    const page = await browser.newPage();
-    await page.goto(process.env.CALENDAR_URL, {
-        waitUntil: 'networkidle2'
-    });
-
-    // get html return it
-    const html = await page.content();
-
-    browser.close();
-
+/**
+ * Gets the HTML for the calendar page.
+ * @returns {Promise<string>} A promise that resolves with the HTML for the calendar page.
+ */
+async function getCalendarHTML() {
+	  const headers = { "User-Agent": process.env.USER_AGENT }
+    const { data: html } = await axios.get(process.env.CALENDAR_URL, { headers });
     return html;
 }
 
@@ -51,60 +43,33 @@ function getStringArrayOf($, array) {
 
 }
 
-// function to parse/merge the event and location arrays into an array of event objects
-// input: array of strings containing event data, array of strings containing location data
-// output: array of event objects 
-function mergeEvents($, eventStrings, locationStrings) {
 
-    // error handling
+/**
+ * Parses the event strings as an object.
+ * @param {import("cheerio").CheerioAPI} $ The cheerio API.
+ * @param {string[]} eventStrings An array of events as strings.
+ * @param {string[]} locationStrings An array of locations.
+ * @returns {{ time: string; team: string; date: string; opponent: string; location: string; home: string }[]} An array of event objects.
+ */
+function mergeEvents($, eventStrings, locationStrings) {
     if (eventStrings.length != locationStrings.length) {
         return new Error("Event Strings and Location Strings are not the same length");
     }
-    
-    let events = [];
 
     // Get date from calendar element in html (date relative to page, not machine)
-    let dateElem = removeTabs($(".daily-calendar").text().trim());
-    let date = dateElem.substring(0, dateElem.search(/\n/));
+    const dateElem = removeTabs($(".daily-calendar").text().trim());
+    const date = dateElem.substring(0, dateElem.search(/\n/));
 
-    // loop through each event string and location string
-    // populate array of event objects
-    eventStrings.forEach((eventString, i) => {
+		const events = eventStrings.map((eventString, index) => {
+			const time = eventString.substring(0, eventString.search(" ") + 3);
+			const team = eventString.substring(eventString.search(" ") + 5, eventString.search("vs") - 6);
+			const opponent = eventString.substring(eventString.search("vs") + 3, eventString.length);
+			const location = locationStrings[index];
+			const home = location.includes("Georgetown");
+			return { time, team, date, opponent, location, home };
+		})
 
-        let event = {
-            time: "",
-            date: "",
-            team: "",
-            opponent: "",
-            location: "",
-            home: false
-        }
-
-        // time from string "4:30 PM"
-        event.time = eventString.substring(0, eventString.search(" ") + 3);
-
-        // current day of the week
-        event.date = date
-
-        // team from left side of "vs" in the left side of the string
-        event.team = eventString.substring(eventString.search(" ") + 5, eventString.search("vs") - 6);
-
-        // opponent from right side of "vs" in event string
-        event.opponent = eventString.substring(eventString.search("vs") + 3, eventString.length);
-
-
-        event.location = locationStrings[i];
-
-        if (event.location.includes("Georgetown")) {
-            event.home = true;
-        }
-
-        events.push(event)
-
-    })
-
-    return events;
-
+		return events;
 }
 
 function removeTabs(string) {
@@ -112,7 +77,7 @@ function removeTabs(string) {
 }
 
 module.exports = {
-    scrapeCalendar,
+    getCalendarHTML,
     getStringArrayOf,
     mergeEvents
 }
