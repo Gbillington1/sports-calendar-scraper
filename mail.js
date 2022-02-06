@@ -14,7 +14,7 @@ let transporter = nodemailer.createTransport({
 // output: array of strings containing announcements
 function generateAnnouncementsFromEvents(events) {
     let announcements = [];
-
+    console.log(events)
     // form announcement for each event
     events.forEach(event => {
 
@@ -41,7 +41,7 @@ function sendAnnouncementsEmail(announcements) {
         from: process.env.MAIL_FROM,
         to: process.env.MAIL_TO,
         subject: "Today's Sports News",
-        text: text
+        text: text + " Dummy string for TikTok"
     };
 
     // send email
