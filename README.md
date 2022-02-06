@@ -2,7 +2,7 @@
 This NodeJS script scrapes my school's sports calendar and then sends me an email with the properly formatted events to read on the morning announcments at school.
 
 ### Todo
-- [ ] Handle special events (swim/wrestling meets, golf matches, etc.)
+- [ ] Handle special events (swim/wrestling meets, golf matches, postponed events, rescheduled events, canceled events, etc.)
 - [ ] Scrape scores from games that happened the day before to report on announcements
 - [x] Configure RPI 
 - [x] Write cronjob to run script every weekday at 7 AM `0 7 * * 1-5 bash runsportscalscraper.sh`
