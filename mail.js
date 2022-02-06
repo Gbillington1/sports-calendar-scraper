@@ -41,7 +41,7 @@ function sendAnnouncementsEmail(announcements) {
         from: process.env.MAIL_FROM,
         to: process.env.MAIL_TO,
         subject: "Today's Sports News",
-        text: text + " Dummy string for TikTok"
+        text: text + " dummy text"
     };
 
     // send email
