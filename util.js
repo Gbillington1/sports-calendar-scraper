@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { default: axios } = require("axios");
 
 /**
@@ -65,7 +66,7 @@ function mergeEvents($, eventStrings, locationStrings) {
 			const team = eventString.substring(eventString.search(" ") + 5, eventString.search("vs") - 6);
 			const opponent = eventString.substring(eventString.search("vs") + 3, eventString.length);
 			const location = locationStrings[index];
-			const home = location.includes("Georgetown");
+			const home = location.includes(process.env.HOME_TOWN);
 			return { time, team, date, opponent, location, home };
 		})
 
