@@ -23,9 +23,9 @@ function getStringArrayOf($, array) {
         // excludes the "Events" row that doesn't have an event
         if (!string.includes($(array[0]).text().trim())) {
 
-            // remove weird tab characters
+            // remove weird spacing characters
             if (string.includes("\t") || string.includes("\n")) {
-                string = removeTabs(string).replace(/\n/g, "");
+                string = removeSpacing(string);
             }
 
             // add space between event and rescheduled date
@@ -63,7 +63,7 @@ function mergeEvents($, eventStrings, locationStrings) {
     }
 
     // Get date from calendar element in html (date relative to page, not machine)
-    const dateElem = removeTabs($(".daily-calendar").text().trim());
+    const dateElem = removeSpacing($(".daily-calendar").text().trim());
     const date = dateElem.substring(0, dateElem.search(/\n/));
 
     const events = eventStrings.filter((eventString) => {
@@ -84,8 +84,8 @@ function mergeEvents($, eventStrings, locationStrings) {
     return events;
 }
 
-function removeTabs(string) {
-    return string.replace(/\t/g, "")
+function removeSpacing(string) {
+    return string.replace(/\t|\n/g, "");
 }
 
 module.exports = {

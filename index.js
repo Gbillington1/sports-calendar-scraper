@@ -10,8 +10,9 @@ const mail = require('./mail.js');
     const $ = cheerio.load(html);
 
     const eventStrings = util.getStringArrayOf($, $('.calendar-daily-event'));
-
+    
     // light error handling
+    // TODO: email me this string
     if (eventStrings.length == 0) {
         console.log("There are no events today.")
         return
@@ -24,6 +25,7 @@ const mail = require('./mail.js');
     }
     
     const locationStrings = util.getStringArrayOf($, $('.calendar-daily-location'));
+    console.log(locationStrings)
     
     // merge events and locations into an array of event objects
     const events = util.mergeEvents($, eventStrings, locationStrings)
@@ -32,6 +34,6 @@ const mail = require('./mail.js');
     const announcements = mail.generateAnnouncementsFromEvents(events);
 
     // send email to my address with the events in announement readable format
-    mail.sendAnnouncementsEmail(announcements);
+    // mail.sendAnnouncementsEmail(announcements);
     
 })();
