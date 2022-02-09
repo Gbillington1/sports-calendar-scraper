@@ -83,8 +83,6 @@ function mergeEvents($, eventStrings, locationStrings) {
         return { time, team, opponent, date, location, home };
     })
 
-    console.log(events)
-
     return events;
 }
 

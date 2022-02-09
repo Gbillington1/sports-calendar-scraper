@@ -33,6 +33,6 @@ const mail = require('./mail.js');
     const announcements = mail.generateAnnouncementsFromEvents(events);
 
     // send email to my address with the events in announement readable format
-    // mail.sendAnnouncementsEmail(announcements);
+    mail.sendAnnouncementsEmail(announcements);
     
 })();
