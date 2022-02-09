@@ -1,3 +1,4 @@
+process.chdir(__dirname); // needed for env vars to work
 require("dotenv").config();
 
 const cheerio = require('cheerio');
