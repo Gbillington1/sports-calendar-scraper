@@ -14,7 +14,7 @@ let transporter = nodemailer.createTransport({
 // output: array of strings containing announcements
 function generateAnnouncementsFromEvents(events) {
     let announcements = [];
-    console.log(events)
+
     // form announcement for each event
     events.forEach(event => {
 

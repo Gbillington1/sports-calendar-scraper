@@ -17,8 +17,9 @@ function getStringArrayOf($, array) {
 
     let stringArray = [];
     array.each((i, elem) => {
-
+        
         let string = $(elem).text().trim();
+
 
         // excludes the "Events" row that doesn't have an event
         if (!string.includes($(array[0]).text().trim())) {
@@ -64,7 +65,8 @@ function mergeEvents($, eventStrings, locationStrings) {
 
     // Get date from calendar element in html (date relative to page, not machine)
     const dateElem = removeSpacing($(".daily-calendar").text().trim());
-    const date = dateElem.substring(0, dateElem.search(/\n/));
+    const dateStrings = dateElem.split(",").map(str => str.trim());
+    const date = dateStrings[0] + ", " + dateStrings[1];
 
     const events = eventStrings.filter((eventString) => {
         if (eventString.includes('Canceled')) {
@@ -80,6 +82,8 @@ function mergeEvents($, eventStrings, locationStrings) {
         const home = location.includes(process.env.HOME_TOWN);
         return { time, team, opponent, date, location, home };
     })
+
+    console.log(events)
 
     return events;
 }
