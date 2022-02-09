@@ -7,6 +7,7 @@ const { default: axios } = require("axios");
  */
 async function getCalendarHTML() {
     const headers = { "User-Agent": process.env.USER_AGENT }
+    console.log(process.env.CALENDAR_URL)
     const { data: html } = await axios.get(process.env.CALENDAR_URL, { headers });
     return html;
 }
