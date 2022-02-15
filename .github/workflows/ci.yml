@@ -22,7 +22,7 @@ jobs:
       uses: hmanzur/actions-set-secret@v2.0.0
       with:
         name: NODE_ENVIRONMENT_VARIABLES
-        value: ${{ cat .env }}
+        value: cat .env
         repository: ${{ github.repository }}
         token: ${{ secrets.PAT }}
     - name: Deploy via SSH
@@ -31,7 +31,7 @@ jobs:
         command: |
           echo ssh successful
           echo starting CI
-
+          echo ${{ secrets.NODE_ENVIRONMENT_VARIABLES }}
           cd ~/sports-calendar-scraper && git pull
           echo pulled latest code to server
 
