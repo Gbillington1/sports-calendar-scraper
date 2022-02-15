@@ -8,7 +8,7 @@ let transporter = nodemailer.createTransport({
         user: process.env.MAIL_FROM,
         pass: process.env.MAIL_PASS
     }
-});   
+});
 
 // input: array of events objects
 // output: array of strings containing announcements
@@ -27,21 +27,13 @@ function generateAnnouncementsFromEvents(events) {
     return announcements;
 }
 
-// send the announcements to my email
-function sendAnnouncementsEmail(announcements) {
-
-    // form email body
-    let text = "Today's sports news:\n\n";
-    for (let i = 0; i < announcements.length; i++) {
-        text += `${announcements[i]}\n\n`;
-    }
-
+function sendEmail(subject, message) {
     // form mail options
     let mailOptions = {
         from: process.env.MAIL_FROM,
         to: process.env.MAIL_TO,
-        subject: "Today's Sports News",
-        text: text
+        subject: subject,
+        text: message
     };
 
     // send email
@@ -49,13 +41,24 @@ function sendAnnouncementsEmail(announcements) {
         if (error) {
             console.log(error);
         } else {
-            console.log('Announcement email sent: \n' + info.response);
+            console.log('Email sent: \n' + info.response);
         }
     });
+}
+
+// send the announcements to my email
+function getAnnouncementString(announcements) {
+
+    // form email body
+    let text = "Today's sports news:\n\n";
+    for (let i = 0; i < announcements.length; i++) {
+        text += `${announcements[i]}\n\n`;
+    }
 
 }
 
 module.exports = {
     generateAnnouncementsFromEvents,
-    sendAnnouncementsEmail
+    sendEmail,
+    getAnnouncementString
 }

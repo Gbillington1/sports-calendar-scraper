@@ -15,7 +15,7 @@ const mail = require('./mail.js');
     // light error handling
     // TODO: email me this string
     if (eventStrings.length == 0) {
-        console.log("There are no events today.")
+        mail.sendEmail("Georgetown Sports Calendar", "No events today");
         return
     }
 
@@ -33,7 +33,10 @@ const mail = require('./mail.js');
     // generate announcements from events
     const announcements = mail.generateAnnouncementsFromEvents(events);
 
+    // get email body from announcements
+    const announcementString = mail.getAnnouncementString(announcements);
+
     // send email to my address with the events in announement readable format
-    mail.sendAnnouncementsEmail(announcements);
+    mail.sendEmail("Today's Sports News", announcementsString);
     
 })();
