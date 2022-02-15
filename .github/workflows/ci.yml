@@ -22,8 +22,7 @@ jobs:
       uses: gliech/create-github-secret-action@v1
       with:
         name: NODE_ENVIRONMENT_VARIABLES
-        value: 
-          run: cat .env
+        value: {{ cat .env }}
         pa_token: ${{ secrets.PAT }}
     - name: Deploy via SSH
       uses: fifsky/ssh-action@master
