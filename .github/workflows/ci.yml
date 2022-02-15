@@ -1,24 +1,36 @@
-name: Deploy via SSH
-on: [push]
+name: Raspberry Pi CD
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push events but only for the development branch
+  push: 
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  deploy:
-    name: Deploy
+   # This workflow contains a single job called "update-rpi"
+  update-rpi:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Deploy via SSH
       uses: fifsky/ssh-action@master
       with:
         command: |
           echo ssh successful
-          # git update to latest codebase on main branch
-          echo Starting CI
+          echo starting CI
           cd ~/sports-calendar-scraper && git pull
-          echo Latest code pulled to server
+          echo pulled latest code to server
           npm install
           echo Updated npm packages
           echo ${{ secrets.PASSWORD }} | sudo -S cp runsportscalcraper.sh /usr/bin
-          echo Updated craper executable on server
-          echo Sports calendar scraper has been updated
+          echo Updated scraper executable on server
+          echo CI completed
         host: ${{ secrets.HOST }}
         user: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
