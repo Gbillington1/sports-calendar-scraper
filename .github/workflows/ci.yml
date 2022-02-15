@@ -28,7 +28,7 @@ jobs:
           echo pulled latest code to server
           npm install
           echo Updated npm packages
-          echo ${{ secrets.PASSWORD }} | sudo -S cp runsportscalcraper.sh /usr/bin
+          $echo ${{ secrets.PASSWORD }} | sudo -S cp runsportscalcraper.sh /usr/bin
           echo Updated scraper executable on server
           echo CI completed
         host: ${{ secrets.HOST }}
