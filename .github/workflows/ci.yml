@@ -19,7 +19,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Read .env file
-      run: cat ../../.env >> ${GITHUB_ENV}
+      run: cat /Users/grahambillington/Documents/Programming/JavaScript/sports-calendar-scraper/.env >> ${GITHUB_ENV}
 
     # - name: Update .env file secret
     #   uses: gliech/create-github-secret-action@v1
