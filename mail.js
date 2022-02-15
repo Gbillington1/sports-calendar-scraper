@@ -41,7 +41,7 @@ function sendEmail(subject, message) {
         if (error) {
             console.log(error);
         } else {
-            console.log('Email sent: \n' + info.response);
+            console.log('Email sent: ' + info.response);
         }
     });
 }
@@ -54,6 +54,8 @@ function getAnnouncementString(announcements) {
     for (let i = 0; i < announcements.length; i++) {
         text += `${announcements[i]}\n\n`;
     }
+
+    return text;
 
 }
 
