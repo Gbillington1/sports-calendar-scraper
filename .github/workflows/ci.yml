@@ -21,7 +21,7 @@ jobs:
     - name: Load .env file 
       uses: falti/dotenv-action@v0.2.7  
       with:
-        path: ./.env
+        path: ~/Documents/Programming/JavaScript/sports-calendar-scraper/.env
 
 
     - name: Update .env file secret
