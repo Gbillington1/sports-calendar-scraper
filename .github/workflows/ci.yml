@@ -18,12 +18,18 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - name: Load .env file 
+        uses: falti/dotenv-action@v0.2.7  
+        path: .env
+
+
     - name: Update .env file secret
       uses: gliech/create-github-secret-action@v1
       with:
         name: NODE_ENVIRONMENT_VARIABLES
-        value: ${{ env }}
+        value:  ${{ steps.dotenv.outputs }}
         pa_token: ${{ secrets.PAT }}
+
     - name: Deploy via SSH
       uses: fifsky/ssh-action@master
       with:
