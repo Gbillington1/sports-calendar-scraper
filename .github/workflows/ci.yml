@@ -26,7 +26,6 @@ jobs:
           echo starting CI
           cd ~/sports-calendar-scraper && git pull
           echo pulled latest code to server
-          sudo -S cp runsportscalcraper.sh /usr/bin
           echo ${{ secrets.PASSWORD }}
           echo Updated scraper executable on server
           npm install
