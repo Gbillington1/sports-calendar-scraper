@@ -1,5 +1,4 @@
-process.chdir(__dirname); // needed for env vars to work
-require("dotenv").config();
+require("dotenv").config({path: __dirname + "/.env"});
 
 const cheerio = require('cheerio');
 const util = require('./util.js');
