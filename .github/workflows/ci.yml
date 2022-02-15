@@ -20,8 +20,6 @@ jobs:
     steps:
     - name: Load .env file 
       uses: xom9ikk/dotenv@v1.0.2
-      with: 
-        path: /Users/grahambillington/Documents/Programming/JavaScript/sports-calendar-scraper/
 
     # - name: Update .env file secret
     #   uses: gliech/create-github-secret-action@v1
