@@ -33,5 +33,6 @@ jobs:
           echo CI completed
         host: ${{ secrets.HOST }}
         user: ${{ secrets.USERNAME }}
+        pass: ${{ secrets.PASSWORD}}
         key: ${{ secrets.KEY }}
      
