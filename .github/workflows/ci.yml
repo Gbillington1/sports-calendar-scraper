@@ -22,7 +22,6 @@ jobs:
       uses: xom9ikk/dotenv@v1.0.2
       with: 
         path: ~/Documents/Programming/JavaScript/sports-calendar-scraper
-        mode: development
 
     - name: Update .env file secret
       uses: gliech/create-github-secret-action@v1
