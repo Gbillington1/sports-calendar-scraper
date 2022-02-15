@@ -37,6 +37,6 @@ const mail = require('./mail.js');
     const announcementString = mail.getAnnouncementString(announcements);
 
     // send email to my address with the events in announement readable format
-    mail.sendEmail("Today's Sports News", announcementsString);
+    mail.sendEmail("Today's Sports News", announcementString);
     
 })();
