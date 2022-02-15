@@ -19,7 +19,7 @@ jobs:
           echo "Latest code pulled to server"
           npm install
           echo "Installed new node packages"
-          echo secrets.SUDO_PASS | sudo -S cp runsportscalcraper.sh /usr/bin
+          echo ${{ secrets.SUDO_PASS }} | sudo -S cp runsportscalcraper.sh /usr/bin
           echo "Scraper executable updated on server"
           echo "CI completed"
      
