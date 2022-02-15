@@ -6,20 +6,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Deploy via SSH
-      uses: appleboy/ssh-action@master
+      uses: fifsky/ssh-action@master
       with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          echo "ssh successful"
+        command: |
+          echo ssh successful
           # git update to latest codebase on main branch
-          echo "Beginning CI"
+          echo Starting CI
           cd ~/sports-calendar-scraper && git pull
-          echo "Latest code pulled to server"
+          echo Latest code pulled to server
           npm install
-          echo "Installed new node packages"
+          echo Updated npm packages
           echo ${{ secrets.SUDO_PASS }} | sudo -S cp runsportscalcraper.sh /usr/bin
-          echo "Scraper executable updated on server"
-          echo "CI completed"
+          echo Updated craper executable on server
+          echo Sports calendar scraper has been updated
+        host: ${{ secrets.SSH_HOST }}
+        user: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
      
