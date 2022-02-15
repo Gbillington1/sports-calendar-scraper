@@ -19,12 +19,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Update .env file secret
-      uses: hmanzur/actions-set-secret@v2.0.0
+      uses: gliech/create-github-secret-action@v1
       with:
         name: NODE_ENVIRONMENT_VARIABLES
-        value: cat .env
-        repository: ${{ github.repository }}
-        token: ${{ secrets.PAT }}
+        value: 
+          run: cat .env
+        pa_token: ${{ secrets.PAT }}
     - name: Deploy via SSH
       uses: fifsky/ssh-action@master
       with:
@@ -32,7 +32,7 @@ jobs:
           echo ssh successful
           echo starting CI
           
-          echo ${{ secrets.NODE_ENVIRONMENT_VARIABLE }} > .env
+          echo ${{ secrets.NODE_ENVIRONMENT_VARIABLES }} > .env
           echo Updated environment variables with .env
 
           cd ~/sports-calendar-scraper && git pull
