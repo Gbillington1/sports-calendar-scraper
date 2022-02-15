@@ -8,7 +8,7 @@ let transporter = nodemailer.createTransport({
         user: process.env.MAIL_FROM,
         pass: process.env.MAIL_PASS
     }
-});
+});   
 
 // input: array of events objects
 // output: array of strings containing announcements
