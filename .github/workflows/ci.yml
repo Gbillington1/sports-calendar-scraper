@@ -16,10 +16,10 @@ jobs:
           echo Latest code pulled to server
           npm install
           echo Updated npm packages
-          echo ${{ secrets.SUDO_PASS }} | sudo -S cp runsportscalcraper.sh /usr/bin
+          echo ${{ secrets.PASSWORD }} | sudo -S cp runsportscalcraper.sh /usr/bin
           echo Updated craper executable on server
           echo Sports calendar scraper has been updated
-        host: ${{ secrets.SSH_HOST }}
-        user: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
+        host: ${{ secrets.HOST }}
+        user: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
      
