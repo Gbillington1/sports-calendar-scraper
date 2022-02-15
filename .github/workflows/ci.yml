@@ -22,19 +22,21 @@ jobs:
       uses: gliech/create-github-secret-action@v1
       with:
         name: NODE_ENVIRONMENT_VARIABLES
-        value: cat .env
+        value: ${{ .env }}
         pa_token: ${{ secrets.PAT }}
     - name: Deploy via SSH
       uses: fifsky/ssh-action@master
       with:
         command: |
           echo ssh successful
+
+          cd ~/sports-calendar-scraper
           echo starting CI
           
           echo ${{ secrets.NODE_ENVIRONMENT_VARIABLES }} > .env
           echo Updated environment variables with .env
 
-          cd ~/sports-calendar-scraper && git pull
+          git pull
           echo pulled latest code to server
 
           echo ${{ secrets.PASSWORD }} | sudo -S cp runsportscalscraper.sh /usr/bin
