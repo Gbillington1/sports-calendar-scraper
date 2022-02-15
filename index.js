@@ -1,4 +1,4 @@
-require("dotenv").config({path: __dirname + "/.env", silent: true});
+require('dotenv').config({path: './.env'});
 
 const cheerio = require('cheerio');
 const util = require('./util.js');
