@@ -22,7 +22,7 @@ jobs:
       uses: hmanzur/actions-set-secret@v2.0.0
       with:
         name: NODE_ENVIRONMENT_VARIABLES
-        value: cat .env
+        value: ${{ cat .env }}
         repository: ${{ github.repository }}
         token: ${{ secrets.PAT }}
     - name: Deploy via SSH
