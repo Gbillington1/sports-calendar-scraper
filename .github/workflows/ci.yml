@@ -33,6 +33,7 @@ jobs:
           echo starting CI
           
           echo ${{ secrets.NODE_ENVIRONMENT_VARIABLE }} > .env
+          echo Updated environment variables with .env
 
           cd ~/sports-calendar-scraper && git pull
           echo pulled latest code to server
