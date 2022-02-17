@@ -14,7 +14,7 @@ const mail = require('./mail.js');
     // light error handling
     // TODO: email me this string
     if (eventStrings.length == 0) {
-        mail.sendEmail("Georgetown Sports Calendar", "No events today");
+        mail.sendEmail(`${process.env.HOME_TOWN} Sports Calendar`, "No events today");
         return
     }
 
