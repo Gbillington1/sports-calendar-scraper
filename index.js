@@ -1,10 +1,8 @@
-if (process.env.NODE_ENV == "development") {
-    require('dotenv').config({path: './.env'});
-} else if (process.env.NODE_ENV == "production") {
+if (process.env.NODE_ENV === "production") {
     require('dotenv').config({path: '/home/graham/sports-calendar-scraper/.env'});
+} else {
+    require('dotenv').config({path: './.env'});
 }
-
-console.log(process.env.NODE_ENV)
 
 const cheerio = require('cheerio');
 const util = require('./util.js');
