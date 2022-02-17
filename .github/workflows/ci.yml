@@ -40,7 +40,7 @@ jobs:
           echo starting CI
           
           # echo ${{ env }} > .env
-          echo Updated environment variables with .env
+          # echo Updated environment variables with .env
 
           git pull
           echo pulled latest code to server
