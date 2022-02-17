@@ -1,5 +1,7 @@
 require('dotenv').config({path: '/home/graham/sports-calendar-scraper/.env'});
 
+console.log(process.env.NODE_ENV)
+
 const cheerio = require('cheerio');
 const util = require('./util.js');
 const mail = require('./mail.js');
