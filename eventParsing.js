@@ -64,6 +64,7 @@ function getEvents($) {
     const locations = getLocations($);
     const statuses = getGameStatuses($);
     const homeTeams = getHomeTeams($);
+    const eventTitles = getEventTitles($);
     const date = getDate($);
 
     // throw error if the above arrays are not the same length
@@ -71,30 +72,30 @@ function getEvents($) {
         throw new Error("Event info arrays are not the same length");
     }
 
+    let events = [];
+
     for (let i = 0; i < games.length; i++) {
 
-        // TODO: handle oddly formatted events
-        if (games[i].includes('Swimming & Diving')) {
-
-        } else if (games[i].includes('Wrestling')) {
-
-        } else if (games[i].includes('Cheerleading')) {
-
-        }
-
-        // return an object with the event information
-        return {
+        let event = {
             time: times[i],
             team: homeTeams[i],
             opponent: opponents[i],
+            eventTitle: eventTitles[i],
             date: date,
             location: locations[i],
-            status: statuses[i]
+            status: statuses[i],
         }
+
+        // Checks if the event one of the 3 weirdly formatted sports and if the event is a regular event or a league wide event (no opponents) 
+        if ((games[i].includes('Swimming & Diving') || games[i].includes('Wrestling') || games[i].includes('Cheerleading')) && eventTitles[i].length > 0) {
+            event.opponent = eventTitles[i];
+        }
+
+        events.push(event);
 
     }
 
-    return games;
+    return events;
 
 }
 
@@ -216,6 +217,28 @@ function getOpponents(gameStrings) {
 function getDate($) {
     const dateString = $('.daily-calendar span').eq(0).text().trim()
     return dateString;
+}
+
+/**
+ * Parses event title out of the .calendar-daily-title element to check for tournaments, league meets, etc.
+ * @param {import("Cheerio").CheerioAPI} $ The Cheerio API to parse HTML
+ * @returns {string[]} An array of event titles
+ */
+function getEventTitles($) {
+
+    let eventTitles = [];
+
+    $('.calendar-daily-event span.d-block').each(function () {
+
+        if ($(this).hasClass('calendar-daily-title')) {
+
+            eventTitles.push($(this).text().trim())
+
+        }
+    })
+
+    return eventTitles;
+
 }
 
 module.exports = {
