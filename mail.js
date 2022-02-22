@@ -1,4 +1,3 @@
-require('dotenv').config()
 const nodemailer = require('nodemailer');
 
 let transporter = nodemailer.createTransport({
