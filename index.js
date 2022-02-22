@@ -15,6 +15,8 @@ const mail = require('./mail.js');
     const $ = cheerio.load(html);
 
     const events = eventParsing.getEvents($);
+    console.log(events)
+
 
     // const eventStrings = util.getStringArrayOf($, $('.calendar-daily-event'));
 
