@@ -50,54 +50,52 @@
 /**
  * Parses event text from website as an object
  * @param {import("cheerio").CheerioAPI} $ The Cheerio API to parse HTML
- * @returns {{ time: string; team: string; opponent: string; date: string; location: string; home: string }[]}
+ * @returns {{ time: string; team: string; opponent: string; date: string; location: string; status: string }[]}
  */
 function getEvents($) {
 
     // remove trailing league string from the event elements
     $('.league-box').remove();
 
-    // select the right set of HTML elements and get the text content
-
+    // get relevent event information
     const games = getGameStrings($);
-
-    // handle different formats of events
-    games.map(game => {
-
-        if (game.includes('Swimming & Diving')) {
-
-        } else if (game.includes('Wrestling')) {
-
-        } else if (game.includes('Cheerleading')) {
-
-        }
-    })
-
-
+    const times = getTimes(games);
+    const opponents = getOpponents(games);
     const locations = getLocations($);
     const statuses = getGameStatuses($);
-    console.log(games)
-    console.log(locations)
-    console.log(statuses)
-
-    const times = getTimes(games);
     const homeTeams = getHomeTeams($);
-    const opponents = getOpponents(games);
     const date = getDate($);
-    console.log(times)
-    console.log(homeTeams)
-    console.log(opponents)
-    console.log(date)
 
+    // throw error if the above arrays are not the same length
+    if (games.length != locations.length || games.length != statuses.length || games.length != times.length || games.length != homeTeams.length || games.length != opponents.length) {
+        throw new Error("Event info arrays are not the same length");
+    }
 
-    // clean and extract the right data out of the text content strings
+    for (let i = 0; i < games.length; i++) {
 
-    // put the string data into an object and return
+        // TODO: handle oddly formatted events
+        if (games[i].includes('Swimming & Diving')) {
 
-}
+        } else if (games[i].includes('Wrestling')) {
 
-function makeEvent() {
-    
+        } else if (games[i].includes('Cheerleading')) {
+
+        }
+
+        // return an object with the event information
+        return {
+            time: times[i],
+            team: homeTeams[i],
+            opponent: opponents[i],
+            date: date,
+            location: locations[i],
+            status: statuses[i]
+        }
+
+    }
+
+    return games;
+
 }
 
 /**
@@ -119,8 +117,6 @@ function getGameStrings($) {
             //     console.log('chillin')
             // }
 
-            // This will get the team playing in the game (not opponent)
-            // console.log()
             gameStrings.push($(this).text().trim())
 
         }
