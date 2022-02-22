@@ -19,8 +19,8 @@
      - Cheerleading
 
     2.
-     - Swimming & Diving: 2:30 PM: Varsity Girls Swimming & Diving CAL League MeetCAL League Meet
-     - Wrestling: 9:30 AM: Varsity Wrestling CAL/NEC OpenCAL/NEC Open
+     - Swimming & Diving: 2:30 PM: Varsity Girls Swimming & Diving {leagueName} League Meet{leagueName} League Meet
+     - Wrestling: 9:30 AM: Varsity Wrestling {leagueName} Open{leagueName} Open
      - Cheerleading: 6:30 PM: Varsity Fall Cheerleading {leagueName} League Cheering Comp {leagueName} League Cheering Comp
 
     What other formatting issues are there?
