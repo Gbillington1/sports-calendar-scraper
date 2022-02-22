@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const { default: axios } = require("axios");
 
 /**
@@ -17,7 +17,7 @@ function getStringArrayOf($, array) {
 
     let stringArray = [];
     array.each((i, elem) => {
-        
+
         let string = $(elem).text().trim();
 
 
@@ -52,13 +52,14 @@ function getStringArrayOf($, array) {
 
 
 /**
- * Parses the event strings as an object.
+ * Parses the event/location strings and creates a list of event objects.
  * @param {import("cheerio").CheerioAPI} $ The cheerio API.
  * @param {string[]} eventStrings An array of events as strings.
  * @param {string[]} locationStrings An array of locations.
  * @returns {{ time: string; team: string; opponent: string; date: string; location: string; home: string }[]} An array of event objects.
  */
 function mergeEvents($, eventStrings, locationStrings) {
+
     if (eventStrings.length != locationStrings.length) {
         return new Error("Event Strings and Location Strings are not the same length");
     }
@@ -68,13 +69,20 @@ function mergeEvents($, eventStrings, locationStrings) {
     const dateStrings = dateElem.split(",").map(str => str.trim());
     const date = dateStrings[0] + ", " + dateStrings[1];
 
-    const events = eventStrings.filter((eventString) => {
-        if (eventString.includes('Canceled')) {
-            return false; // skip canceled events
+    // skip canceled and JV events
+    const events = eventStrings.filter((eventString, index) => {
+        if (eventString.includes('Canceled') || eventString.includes('JV') || eventString.includes('Junior Varsity')) {
+
+            // remove respective location so the .map() doesn't get messed up
+            locationStrings.splice(index, 1);
+            return false;
         }
         return true;
+
+    // parse string and form event object
     }).map((eventString, index) => {
 
+        // will have to change in some way to handle different types of events
         const time = eventString.substring(0, eventString.search(" ") + 3);
         const team = eventString.substring(eventString.search(" ") + 5, eventString.search("vs") - 6);
         const opponent = eventString.substring(eventString.search("vs") + 3, eventString.length);
