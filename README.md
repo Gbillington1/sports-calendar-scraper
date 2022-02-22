@@ -1,4 +1,4 @@
-# Sports Calendar Scraper [![Raspberry Pi CD](https://github.com/Gbillington1/sports-calendar-scraper/actions/workflows/ci.yml/badge.svg)](https://github.com/Gbillington1/sports-calendar-scraper/actions) ![Current Release](https://img.shields.io/github/v/release/Gbillington1/sports-calendar-scraper) ![Current Version](https://img.shields.io/github/v/tag/Gbillington1/sports-calendar-scraper)
+# Sports Calendar Scraper [![Raspberry Pi CD](https://github.com/Gbillington1/sports-calendar-scraper/actions/workflows/ci.yml/badge.svg)](https://github.com/Gbillington1/sports-calendar-scraper/actions) [![Current Release](https://img.shields.io/github/v/release/Gbillington1/sports-calendar-scraper)](https://github.com/Gbillington1/sports-calendar-scraper/releases/tag/v1.0) [![Current Version Tag](https://img.shields.io/github/v/tag/Gbillington1/sports-calendar-scraper)](https://github.com/Gbillington1/sports-calendar-scraper/tags)
 This NodeJS script scrapes my school's sports calendar and then sends me an email with the properly formatted events to read on the morning announcments at school.
 
 ### Todo
